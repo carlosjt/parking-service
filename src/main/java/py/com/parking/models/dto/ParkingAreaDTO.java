@@ -28,6 +28,7 @@ public class ParkingAreaDTO {
     @NotBlank
     private String location;
 
+    @NotNull
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
