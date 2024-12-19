@@ -13,25 +13,22 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "vehicles")
+@Table(name = "vehicles", schema = "parking_service_core")
 public class Vehicles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
-
     @NotBlank
     @Column(name = "license_plate", unique = true)
     private String licensePlate;
 
     @NotBlank
+    @Column(name = "vehicle_type")
     private String vehicleType;
 
+    @Column(name = "brand")
     private String brand;
 
     private String model;
@@ -40,9 +37,11 @@ public class Vehicles {
 
     @NotNull
     @CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @NotNull
     @UpdateTimestamp
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }
