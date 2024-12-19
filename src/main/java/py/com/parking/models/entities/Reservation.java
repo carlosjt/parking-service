@@ -42,4 +42,9 @@ public class Reservation {
     @Column(name = "uuid", unique = true, nullable = false, updatable = false)
     private UUID uuid = UUID.randomUUID();
 
+    @Column(name = "event_name", length = 100)
+    private String eventName;
+
+    @Column(name = "notes", length = 255)
+    private String notes;
 }

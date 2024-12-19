@@ -18,4 +18,7 @@ public class ReservationDTO {
     private LocalTime endTime;
     private String status;
     private boolean isSpecialEvent;
+    private Integer eventId;
+    private String notes;
+    private Integer priority;
 }
