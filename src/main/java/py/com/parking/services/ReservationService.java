@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ReservationService {
@@ -32,9 +33,10 @@ public class ReservationService {
     @Inject
     private ReservationMapper reservationMapper;
 
-    public List<ReservationDTO> findAllReservations() {
-        List<Reservation> reservations = reservationRepository.findAll();
-        return reservationMapper.toDTOList(reservations);
+    public List<ReservationDTO> getAllReservations() {
+        return reservationRepository.findAll().stream()
+                .map(ReservationMapper.INSTANCE::toDTO)
+                .collect(Collectors.toList());
     }
     @Transactional
     public ReservationDTO createReservation(ReservationDTO reservationDTO) {
@@ -86,7 +88,10 @@ public class ReservationService {
         reservationRepository.save(reservation);
         return reservationMapper.toDTO(reservation);
     }
-
+    public Optional<ReservationDTO> getReservationById(Integer id) {
+        return reservationRepository.findById(id)
+                .map(ReservationMapper.INSTANCE::toDTO);
+    }
     private boolean isConflict(ParkingArea parkingArea, LocalDate date, LocalTime startTime, LocalTime endTime) {
         List<Reservation> reservations = reservationRepository.findByParkingAreaAndReservationDate(parkingArea, date);
         for (Reservation reservation : reservations) {
