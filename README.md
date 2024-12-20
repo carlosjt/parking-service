@@ -21,42 +21,37 @@ The application can be packaged using:
 ```shell script
 ./mvnw package
 ```
-
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/parking-service-1.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
 ## Provided Code
 
 ### REST
 
 Easily start your REST Web Services
 
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+http://localhost:8080/api/q/swagger-ui
+
+User
+{
+"firstName": “pepito”,
+"lastName": “Perez”,
+"email": "email@gmail.com",
+"phone": "0971999999",
+"userType": "student"
+}
+
+Vehicle
+ABC1235
+license_plate_reader
+1
+
+*******************
+deviceType
+license_plate_reader  (nro chapa)
+id_card_reader        (user id)
+*******************
+Format
+endTime - startTime   (10:00)
+reservationDate       (2024-12-19)
+
+
+Temas implementados: 1, 2, 3, 4, 5
+

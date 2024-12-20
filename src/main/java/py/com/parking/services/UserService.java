@@ -1,6 +1,7 @@
 package py.com.parking.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import py.com.parking.models.entities.ParkingPermissions;
@@ -16,17 +17,17 @@ import java.util.Optional;
 @ApplicationScoped
 public class UserService {
 
-    @Autowired
+    @Inject
     UserRepository userRepository;
 
-    @Autowired
+    @Inject
     ParkingPermissionsRepository parkingPermissionsRepository;
 
     public List<Users> findAllUsers() {
         return userRepository.findAll();
     }
 
-    public Optional<Users> findUserById(Long id) {
+    public Optional<Users> findUserById(Integer id) {
         return userRepository.findById(id);
     }
 
@@ -53,7 +54,7 @@ public class UserService {
         return user;
     }
 
-    public void deleteUserById(Long id) {
+    public void deleteUserById(Integer id) {
         userRepository.deleteById(id);
     }
 

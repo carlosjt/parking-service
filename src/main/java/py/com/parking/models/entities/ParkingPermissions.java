@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "parking_permissions", schema = "parking_service_core")
+@Table(name = "parking_permissions")
 public class ParkingPermissions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @NotNull
     @OneToOne

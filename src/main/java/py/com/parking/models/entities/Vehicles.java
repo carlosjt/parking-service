@@ -13,12 +13,17 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "vehicles", schema = "parking_service_core")
+@Table(name = "vehicles")
 public class Vehicles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
 
     @NotBlank
     @Column(name = "license_plate", unique = true)
@@ -35,12 +40,10 @@ public class Vehicles {
 
     private String color;
 
-    @NotNull
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @NotNull
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;

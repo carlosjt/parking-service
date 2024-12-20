@@ -1,19 +1,3 @@
--- Tabla para gestionar las reservas de espacios de estacionamiento
-CREATE TABLE parking_reservations (
-                                      id SERIAL PRIMARY KEY,
-                                      user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-                                      parking_area_id INT NOT NULL REFERENCES parking_areas(id) ON DELETE CASCADE,
-                                      reservation_date DATE NOT NULL,
-                                      start_time TIME NOT NULL,
-                                      end_time TIME NOT NULL,
-                                      status VARCHAR(20) DEFAULT 'pending',
-                                      is_special_event BOOLEAN DEFAULT FALSE,
-                                      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                      CONSTRAINT check_time_range CHECK (end_time > start_time),
-                                      CONSTRAINT chk_status CHECK (status IN ('pending', 'confirmed', 'cancelled'))
-);
-
 -- Tabla para almacenar eventos especiales relacionados con reservas
 CREATE TABLE special_events (
                                 id SERIAL PRIMARY KEY,
@@ -22,10 +6,26 @@ CREATE TABLE special_events (
                                 event_date DATE NOT NULL,
                                 start_time TIME NOT NULL,
                                 end_time TIME NOT NULL,
-                                parking_area_id INT REFERENCES parking_areas(id) ON DELETE SET NULL,
                                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                 CONSTRAINT check_event_time_range CHECK (end_time > start_time)
+);
+
+-- Tabla para gestionar las reservas de espacios de estacionamiento
+CREATE TABLE parking_reservations (
+                                      id SERIAL PRIMARY KEY,
+                                      user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                                      parking_area_id INT NOT NULL REFERENCES parking_areas(id) ON DELETE CASCADE,
+                                      special_event_id INT REFERENCES special_events(id) ON DELETE CASCADE,
+                                      reservation_date DATE NOT NULL,
+                                      start_time TIME NOT NULL,
+                                      end_time TIME NOT NULL,
+                                      status VARCHAR(20) DEFAULT 'PENDING',
+                                      is_special_event BOOLEAN DEFAULT FALSE,
+                                      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                      CONSTRAINT check_time_range CHECK (end_time > start_time),
+                                      CONSTRAINT chk_status CHECK (status IN ('PENDING', 'CONFIRMED', 'CANCELLED'))
 );
 
 -- Trigger para actualizar automáticamente el campo updated_at en ambas tablas

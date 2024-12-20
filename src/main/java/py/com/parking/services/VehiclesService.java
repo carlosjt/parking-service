@@ -1,7 +1,7 @@
 package py.com.parking.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.inject.Inject;
 import py.com.parking.models.entities.Vehicles;
 import py.com.parking.models.repository.VehicleRepository;
 
@@ -11,14 +11,14 @@ import java.util.Optional;
 @ApplicationScoped
 public class VehiclesService {
 
-    @Autowired
+    @Inject
     VehicleRepository vehicleRepository;
 
     public List<Vehicles> findAll() {
         return vehicleRepository.findAll();
     }
 
-    public Optional<Vehicles> findById(Long id) {
+    public Optional<Vehicles> findById(Integer id) {
         return vehicleRepository.findById(id);
     }
 

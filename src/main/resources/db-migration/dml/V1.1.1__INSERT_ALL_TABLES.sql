@@ -16,26 +16,11 @@ VALUES
     (2, 'teacher', '07:00-20:00', TRUE),
     (3, 'staff', '06:00-22:00', TRUE);
 
-INSERT INTO parking_access_schedule (category, day_of_week, start_time, end_time)
-VALUES
-    ('student', 'Monday', '08:00', '18:00'),
-    ('teacher', 'Monday', '07:00', '20:00'),
-    ('staff', 'Monday', '06:00', '22:00'),
-    ('student', 'Tuesday', '08:00', '18:00'),
-    ('teacher', 'Tuesday', '07:00', '20:00'),
-    ('staff', 'Tuesday', '06:00', '22:00');
-
 INSERT INTO access_control (vehicle_id, entry_time, exit_time, is_authorized)
 VALUES
     (1, '2024-12-17 08:00:00', '2024-12-17 12:00:00', TRUE),
     (2, '2024-12-17 09:00:00', NULL, TRUE),
     (3, '2024-12-17 10:00:00', '2024-12-17 14:00:00', FALSE);
-
-INSERT INTO access_devices (device_type, location, is_active)
-VALUES
-    ('license_plate_reader', 'Main Gate', TRUE),
-    ('id_card_reader', 'East Gate', TRUE),
-    ('license_plate_reader', 'West Gate', TRUE);
 
 INSERT INTO parking_areas (name, total_spaces, occupied_spaces, location)
 VALUES
@@ -49,13 +34,15 @@ VALUES
     (2, 2, '2024-12-17 09:30:00', NULL, TRUE),
     (3, 3, '2024-12-17 10:00:00', '2024-12-17 14:00:00', FALSE);
 
-INSERT INTO parking_reservations (user_id, parking_area_id, reservation_date, start_time, end_time, status, is_special_event)
+INSERT INTO special_events (name, description, event_date, start_time, end_time)
 VALUES
-    (1, 1, '2024-12-18', '09:00', '12:00', 'confirmed', FALSE),
-    (2, 2, '2024-12-18', '08:00', '11:00', 'pending', TRUE),
-    (3, 3, '2024-12-19', '10:00', '13:00', 'cancelled', FALSE);
+    ('Open Day', 'Special parking for university open day.', '2024-12-20', '08:00', '16:00'),
+    ('Faculty Meeting', 'Reserved parking for faculty meeting.', '2024-12-21', '09:00', '12:00');
 
-INSERT INTO special_events (name, description, event_date, start_time, end_time, parking_area_id)
+INSERT INTO parking_reservations (user_id, parking_area_id, reservation_date, start_time, end_time, status, is_special_event, special_event_id)
 VALUES
-    ('Open Day', 'Special parking for university open day.', '2024-12-20', '08:00', '16:00', 1),
-    ('Faculty Meeting', 'Reserved parking for faculty meeting.', '2024-12-21', '09:00', '12:00', 2);
+    (1, 1, '2024-12-18', '09:00', '12:00', 'CONFIRMED', FALSE, null),
+    (2, 2, '2024-12-18', '08:00', '11:00', 'PENDING', TRUE, 1),
+    (3, 3, '2024-12-19', '10:00', '13:00', 'CANCELLED', FALSE, null);
+
+

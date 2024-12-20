@@ -28,7 +28,6 @@ public class VehiclesDTO {
 
     private String color;
 
-    @NotNull
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

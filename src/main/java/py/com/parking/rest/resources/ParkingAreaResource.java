@@ -17,13 +17,6 @@ public class ParkingAreaResource {
     @Inject
     ParkingAreaService parkingAreaService;
 
-    /**
-     * Endpoint para obtener todas las áreas de estacionamiento con filtros opcionales.
-     *
-     * @param available Opcional. Si es true, filtra solo áreas con espacios disponibles.
-     * @param occupied  Opcional. Si es true, filtra solo áreas completamente ocupadas.
-     * @return Lista de áreas de estacionamiento filtrada según los parámetros.
-     */
     @GET
     public List<ParkingAreaDTO> getAllParkingAreas(
             @QueryParam("available") Boolean available,
@@ -32,25 +25,12 @@ public class ParkingAreaResource {
         return parkingAreaService.getAllParkingAreasWithAvailability(available, occupied);
     }
 
-    /**
-     * Endpoint para crear un área de estacionamiento.
-     *
-     * @param parkingAreaDTO Datos del área de estacionamiento.
-     * @return Área de estacionamiento creada.
-     */
     @POST
     public Response createParkingArea(ParkingAreaDTO parkingAreaDTO) {
         ParkingAreaDTO createdParkingArea = parkingAreaService.createParkingArea(parkingAreaDTO);
         return Response.status(Response.Status.CREATED).entity(createdParkingArea).build();
     }
 
-    /**
-     * Endpoint para actualizar un área de estacionamiento.
-     *
-     * @param id             ID del área de estacionamiento.
-     * @param parkingAreaDTO Datos actualizados del área de estacionamiento.
-     * @return Área de estacionamiento actualizada.
-     */
     @PUT
     @Path("/{id}")
     public Response updateParkingArea(@PathParam("id") Integer id, ParkingAreaDTO parkingAreaDTO) {
@@ -58,12 +38,6 @@ public class ParkingAreaResource {
         return Response.ok(updatedParkingArea).build();
     }
 
-    /**
-     * Endpoint para eliminar un área de estacionamiento.
-     *
-     * @param id ID del área de estacionamiento a eliminar.
-     * @return Respuesta con el estado de la operación.
-     */
     @DELETE
     @Path("/{id}")
     public Response deleteParkingArea(@PathParam("id") Integer id) {
@@ -71,13 +45,6 @@ public class ParkingAreaResource {
         return Response.noContent().build();
     }
 
-    /**
-     * Endpoint para actualizar la ocupación de un área de estacionamiento.
-     *
-     * @param id             ID del área de estacionamiento.
-     * @param occupiedSpaces Nuevo número de espacios ocupados.
-     * @return Área de estacionamiento actualizada.
-     */
     @PUT
     @Path("/{id}/occupancy")
     public Response updateParkingAreaOccupancy(@PathParam("id") Integer id, @QueryParam("occupiedSpaces") Integer occupiedSpaces) {

@@ -22,7 +22,7 @@ public class UserResource {
 
     @GET
     @Path("/{id}")
-    public Response getUserById(@PathParam("id") Long id) {
+    public Response getUserById(@PathParam("id") Integer id) {
         return userService.findUserById(id)
                 .map(user -> Response.ok(user).build())
                 .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
@@ -35,7 +35,7 @@ public class UserResource {
 
     @PUT
     @Path("/{id}")
-    public Response updateUser(@PathParam("id") Long id, Users user) {
+    public Response updateUser(@PathParam("id") Integer id, Users user) {
         if (user.getId() == null || !user.getId().equals(id)) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("User ID must match the path parameter and cannot be null.")
@@ -48,7 +48,7 @@ public class UserResource {
 
     @DELETE
     @Path("/{id}")
-    public Response deleteUser(@PathParam("id") Long id) {
+    public Response deleteUser(@PathParam("id") Integer id) {
         if (userService.findUserById(id).isPresent()) {
             userService.deleteUserById(id);
             return Response.noContent().build();

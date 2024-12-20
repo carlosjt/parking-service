@@ -1,43 +1,37 @@
 package py.com.parking.models.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
-@Getter
-@Setter
-@Table(name = "parking_areas")
-public class ParkingArea {
+@Table(name = "special_events")
+public class SpecialEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @NotBlank
+    @NotNull
     private String name;
 
-    @NotNull
-    @Min(1)
-    @Column(name = "total_spaces")
-    private Integer totalSpaces;
+    private String description;
 
-    @NotNull
-    @Min(0)
-    @Column(name = "occupied_spaces")
-    private Integer occupiedSpaces;
+    @Column(name = "event_date")
+    private LocalDate eventDate;
 
-    @NotBlank
-    private String location;
+    @Column(name = "start_time")
+    private LocalTime startTime;
+
+    @Column(name = "end_time")
+    private LocalTime endTime;
 
     @NotNull
     @CreationTimestamp
@@ -48,5 +42,5 @@ public class ParkingArea {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-}
 
+}

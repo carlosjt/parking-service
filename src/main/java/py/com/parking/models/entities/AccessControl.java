@@ -25,18 +25,23 @@ public class AccessControl {
     private Vehicles vehicle;
 
     @NotNull
+    @Column(name = "entry_time")
     private LocalDateTime entryTime;
 
+    @Column(name = "exit_time")
     private LocalDateTime exitTime;
 
     @NotNull
+    @Column(name = "is_authorized")
     private Boolean isAuthorized;
 
     @NotNull
     @CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @NotNull
     @UpdateTimestamp
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }

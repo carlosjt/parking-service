@@ -1,9 +1,9 @@
 package py.com.parking.rest.resources;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import py.com.parking.models.entities.Vehicles;
 import py.com.parking.services.VehiclesService;
 
@@ -12,7 +12,7 @@ import py.com.parking.services.VehiclesService;
 @Consumes(MediaType.APPLICATION_JSON)
 public class VehiclesResource {
 
-    @Autowired
+    @Inject
     VehiclesService vehiclesService;
 
     @POST
@@ -27,13 +27,13 @@ public class VehiclesResource {
 
     @GET
     @Path("/{id}")
-    public Response getVehicleById(@PathParam("id") Long id) {
+    public Response getVehicleById(@PathParam("id") Integer id) {
         return Response.ok(vehiclesService.findById(id)).build();
     }
 
     @PUT
     @Path("/{id}")
-    public Response updateVehicle(@PathParam(value = "id") Long id, Vehicles vehicle) {
+    public Response updateVehicle(@PathParam(value = "id") Integer id, Vehicles vehicle) {
         if(vehicle.getId() == null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("User ID must match the path parameter and cannot be null.")
